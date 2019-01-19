@@ -1,0 +1,58 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: spring-boot-web
+  thymeleaf:
+    prefix: classpath:/templates
+    suffix: .html
+    mode: HTML5
+    encoding: UTF-8
+    cache: false
+  datasource:
+        name: test
+        url: jdbc:mysql://139.196.79.91:3306/stock_analysis?createDatabaseIfNotExist=true&useSSL=false&useUnicode=true&characterEncoding=utf8
+        username: root
+        password: ilovemysql^^^
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        dbcp2:
+          pool-prepared-statements: true
+          max-open-prepared-statements: 20
+          test-on-borrow: false
+          test-on-return: false
+          test-while-idle: true
+          validation-query:  select 'x'
+          min-evictable-idle-time-millis: 300000
+          time-between-eviction-runs-millis: 60000
+          min-idle: 1
+          max-wait-millis: 60000
+          initial-size: 1
+          max-total: 20
+  redis:
+    database: 0
+    host: 111.231.140.42
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.mall.dao
+pagehelper:
+  params: pageNum=pageHelperStart;pageSize=pageHelperRows;
+  resonable: false
+  returnPageInfo: check
+  dialect: mysql
+  offsetAsPageNum: false
+  rowBoundsWithCount: false
+  pageSizeZero: true
+
+logging:
+  level:
+    root: info
+    com.taylor.dao: debug
