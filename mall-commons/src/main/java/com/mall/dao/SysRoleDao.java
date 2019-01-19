@@ -1,0 +1,28 @@
+package com.mall.dao;
+
+
+import com.mall.entity.SysRoleEntity;
+import com.mall.entity.UserWindowDto;
+
+import java.util.List;
+
+/**
+ * 角色管理
+ *
+ * @author taylor
+ * @email 516195940@qq.com
+ * @date 2016年9月18日 上午9:33:33
+ */
+public interface SysRoleDao extends BaseDao<SysRoleEntity> {
+
+    /**
+     * 查询用户创建的角色ID列表
+     */
+    List<Long> queryRoleIdList(Long createUserId);
+
+    /**
+     * 查询角色审批选择范围
+     * @return
+     */
+    List<UserWindowDto> queryPageByDto(UserWindowDto userWindowDto);
+}

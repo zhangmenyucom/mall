@@ -7,11 +7,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mall" />
+        <module name="mall-admin" />
+        <module name="mall-commons" />
+        <module name="mall-gen" />
+        <module name="mall-shop" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
       <module name="mall" target="1.8" />
+      <module name="mall-admin" target="1.8" />
+      <module name="mall-commons" target="1.8" />
+      <module name="mall-gen" target="1.8" />
+      <module name="mall-shop" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
