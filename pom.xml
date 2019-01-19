@@ -14,7 +14,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>mall/name>
+    <name>mall</name>
     <url>http://maven.apache.org</url>
 
     <properties>
