@@ -1,0 +1,19 @@
+package ${package}.service;
+
+import ${package}.entity.${className}Entity;
+import org.springframework.stereotype.Service;
+import ${package}.dao.${className}Dao;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * ${comments}Service接口
+ *
+ * @author ${author}
+ * @email ${email}
+ * @date ${datetime}
+ */
+@Service
+public class ${className}Service extends BaseServiceImpl<${className}Entity, ${className}Dao> {
+
+}

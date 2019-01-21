@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mall.dao.SysUserConfigDao">
+
+    <resultMap type="com.mall.entity.SysUserConfigEntity" id="sysUserConfigMap">
+        <result property="id" column="id"/>
+        <result property="merchantId" column="merchant_id"/>
+        <result property="appId" column="app_id"/>
+        <result property="secret" column="secret"/>
+        <result property="mchId" column="mch_id"/>
+        <result property="paySignKey" column="pay_sign_key"/>
+        <result property="certAddress" column="cert_address"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storeAddress" column="store_address"/>
+        <result property="phone" column="phone"/>
+        <result property="storeBanner" column="store_banner"/>
+        <result property="idCard" column="id_card"/>
+        <result property="businessLicence" column="business_licence"/>
+        <result property="isQualityGuarantee" column="is_quality_guarantee"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <select id="queryObject" resultType="com.mall.entity.SysUserConfigEntity">
+		select
+			`id`,
+			`merchant_id`,
+			`app_id`,
+			`secret`,
+			`mch_id`,
+			`pay_sign_key`,
+			`cert_address`,
+			`store_name`,
+			`store_address`,
+        `store_banner`,
+        `id_card`,
+        `business_licence`,
+        `is_quality_guarantee`,
+			`phone`,
+			`create_time`,
+			`update_time`
+		from sys_user_config
+		where id = #{id}
+	</select>
+    <select id="queryByMerchantId" resultMap="sysUserConfigMap">
+		select
+		`id`,
+		`merchant_id`,
+		`app_id`,
+		`secret`,
+		`mch_id`,
+		`pay_sign_key`,
+		`cert_address`,
+		`store_name`,
+		`store_address`,
+        `store_banner`,
+        `id_card`,
+        `business_licence`,
+        `is_quality_guarantee`,
+		`phone`,
+		`create_time`,
+		`update_time`
+		from sys_user_config
+		where merchant_id=#{merchant_id}
+	</select>
+    <select id="queryList" resultType="com.mall.entity.SysUserConfigEntity">
+        select
+        s.`id`,
+        s.`merchant_id`,
+        s.`app_id`,
+        s.`secret`,
+        s.`mch_id`,
+        s.`pay_sign_key`,
+        s.`cert_address`,
+        s.`store_banner`,
+        s.`id_card`,
+        s.`business_licence`,
+        s.`is_quality_guarantee`,
+        s.`store_name`,
+        s.`store_address`,
+        s.`phone`,
+        s.`create_time`,
+        s.`update_time`
+        from sys_user_config s join sys_user u on s.merchant_id=u.user_id
+        WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryAll" resultType="com.mall.entity.SysUserConfigEntity">
+        select
+        `id`,
+        `merchant_id`,
+        `app_id`,
+        `secret`,
+        `mch_id`,
+        `pay_sign_key`,
+        `cert_address`,
+        `store_name`,
+        `store_address`,
+        `store_banner`,
+        `id_card`,
+        `business_licence`,
+        `is_quality_guarantee`,
+        `phone`,
+        `create_time`,
+        `update_time`
+        from sys_user_config
+        WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+        <choose>
+            <when test="sidx != null and sidx.trim() != ''">
+                order by ${sidx} ${order}
+            </when>
+            <otherwise>
+                order by id desc
+            </otherwise>
+        </choose>
+        <if test="offset != null and limit != null">
+            limit #{offset}, #{limit}
+        </if>
+    </select>
+    <select id="queryTotal" resultType="int">
+        select count(*) from sys_user_config
+        WHERE 1=1
+        <if test="merchantId!=null">
+            and merchant_id=#{merchantId}
+        </if>
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+    </select>
+    <select id="queryTotalAll" resultType="int">
+        select count(*) from sys_user_config
+        WHERE 1=1
+        <if test="name != null and name.trim() != ''">
+            AND name LIKE concat('%',#{name},'%')
+        </if>
+    </select>
+    <insert id="save" parameterType="com.mall.entity.SysUserConfigEntity" useGeneratedKeys="true" keyProperty="id">
+		insert into sys_user_config(
+			`merchant_id`,
+			`app_id`,
+			`secret`,
+			`mch_id`,
+			`pay_sign_key`,
+			`cert_address`,
+			`store_name`,
+		    `store_address`,
+        `store_banner`,
+        `id_card`,
+        `business_licence`,
+        `is_quality_guarantee`,
+		    `phone`,
+			`create_time`,
+			`update_time`)
+		values(
+			#{merchantId},
+			#{appId},
+			#{secret},
+			#{mchId},
+			#{paySignKey},
+			#{certAddress},
+			#{storeName},
+			#{storeAddress},
+        #{storeBanner},
+        #{idCard},
+        #{businessLicence},
+        #{isQualityGuarantee},
+			#{phone},
+			#{createTime},
+			#{updateTime})
+	</insert>
+
+    <update id="update" parameterType="com.mall.entity.SysUserConfigEntity">
+        update sys_user_config
+        <set>
+            <if test="merchantId != null">`merchant_id` = #{merchantId},</if>
+            <if test="appId != null">`app_id` = #{appId},</if>
+            <if test="secret != null">`secret` = #{secret},</if>
+            <if test="mchId != null">`mch_id` = #{mchId},</if>
+            <if test="paySignKey != null">`pay_sign_key` = #{paySignKey},</if>
+            <if test="certAddress != null">`cert_address` = #{certAddress},</if>
+            <if test="storeName != null">`store_name` = #{storeName},</if>
+            <if test="storeAddress != null">`store_address` = #{storeAddress},</if>
+            <if test="storeBanner != null">`store_banner` = #{storeBanner},</if>
+            <if test="idCard != null">`id_card` = #{idCard},</if>
+            <if test="businessLicence != null">`business_licence` = #{businessLicence},</if>
+            <if test="isQualityGuarantee != null">`is_quality_guarantee` = #{isQualityGuarantee},</if>
+            <if test="phone != null">`phone` = #{phone},</if>
+            <if test="createTime != null">`create_time` = #{createTime},</if>
+            <if test="updateTime != null">`update_time` = #{updateTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from sys_user_config where id = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from sys_user_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -4,12 +4,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>mall</artifactId>
-        <groupId>com</groupId>
+        <groupId>com.mall</groupId>
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-gen</artifactId>
-
-
+    <packaging>jar</packaging>
+    <description>代码生成器模块</description>
+    <dependencies>
+        <dependency>
+            <groupId>com.mall</groupId>
+            <artifactId>mall-commons</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>
